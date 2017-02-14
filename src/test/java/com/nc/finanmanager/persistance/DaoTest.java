@@ -2,6 +2,7 @@ package com.nc.finanmanager.persistance;
 
 import com.nc.finanmanager.persistance.entity.Category;
 import com.nc.finanmanager.persistance.mapper.CategoryMapper;
+import com.nc.finanmanager.persistance.mapper.ItemMapper;
 import junit.framework.Assert;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -29,7 +30,7 @@ public class DaoTest {
     @Before
     public void setUp() {
         ctx = new AnnotationConfigApplicationContext();
-        ctx.register(MyBatisTestConfig.class);
+        ctx.register(MyBatisConfig.class);
         ctx.refresh();
     }
     
@@ -41,19 +42,26 @@ public class DaoTest {
     @Test
     public void updateFirstCategoryTest(){
         CategoryMapper categoryMapper = ctx.getBean(CategoryMapper.class);
-        Category category = categoryMapper.selectAllCategories().get(0);
-        category.setCategoryName("Chocolate");
+        Category category = categoryMapper.selectCategory(1);
+        category.setCategoryName("food");
         categoryMapper.updateCategory(category);
-        Assert.assertEquals("Not today","Chocolate", categoryMapper.selectAllCategories().get(0));
+        Assert.assertEquals("Not today","food", categoryMapper.selectCategory(1).getCategoryName());
         
     }
     
-    /*@Test
-    public void insertCategoryTest(){
+    @Test
+    public void countItemsTest(){
+        ItemMapper itemMapper = ctx.getBean(ItemMapper.class);
+        Assert.assertEquals("Not today",12, itemMapper.selectItems().size());
+        
+    }
+    
+    @Test
+    public void countItemsInCategoriesTest(){
         CategoryMapper categoryMapper = ctx.getBean(CategoryMapper.class);
-        Category category  = new Category();
-        category.setCategoryName("Cars");
-        categoryMapper.insertCategory(category);
-    } */
+        Category category  = categoryMapper.selectCategory(1);
+        Assert.assertEquals("Not today",12, category.getItems().size());
+        
+    }
     
 }

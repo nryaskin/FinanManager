@@ -7,7 +7,16 @@ public class Item {
     private Integer categoryId;
     private Integer expenses;
     private Date date;
+    private Category category;
 
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+    
     public Integer getItemId() {
         return itemId;
     }
