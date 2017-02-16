@@ -18,6 +18,6 @@ public class BeansTest {
         BaseOperation baseOperation = ctx.getBean(BaseOperation.class);
         Assert.assertEquals("notToday", baseOperation.size(new Category()), 8);
         Assert.assertEquals("notToday", baseOperation.outcomeForCategory(new Category()), 2);
-    }
+}
     
 }

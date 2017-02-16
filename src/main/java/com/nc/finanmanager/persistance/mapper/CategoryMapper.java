@@ -23,7 +23,7 @@ public interface CategoryMapper {
         @Results({
           @Result(property = "cid", column = "category_id"),
           @Result(property = "categoryName", column = "name"),
-          @Result(property ="items", javaType = List.class, column = "category_id", many = @Many("getItems"))
+          @Result(property ="items", javaType = List.class, column = "category_id", many = @Many(select = "getItems"))
         })
     @Select("SELECT * from categories where category_id = #{cid}")
     Category selectCategory(int id);
