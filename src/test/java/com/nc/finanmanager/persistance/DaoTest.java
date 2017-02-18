@@ -7,7 +7,6 @@ import com.nc.finanmanager.persistance.entity.User;
 import com.nc.finanmanager.persistance.mapper.AccountMapper;
 import com.nc.finanmanager.persistance.mapper.CategoryMapper;
 import com.nc.finanmanager.persistance.mapper.CurrencyMapper;
-import com.nc.finanmanager.persistance.mapper.ItemMapper;
 import com.nc.finanmanager.persistance.mapper.UserMapper;
 import junit.framework.Assert;
 import org.junit.After;
@@ -89,6 +88,17 @@ public class DaoTest {
         accountMapper.insertAccount(account);
         assertEquals("No no no", "0000-0000-0000-0000", accountMapper.selectAllAccounts().get(0).getId());
         assertEquals("No no no", user.getUsername(), accountMapper.selectAllAccounts().get(0).getUser().getUsername());
+        accountMapper.deleteAccount(account);    
     }
     
+    @Test
+    public void insertCategoryTest(){
+        CategoryMapper categoryMapper = ctx.getBean(CategoryMapper.class);
+        Category category = new Category();
+        category.setCategoryId("Chocolate");
+        categoryMapper.insertCategory(category);
+        assertEquals("YO, man", category.getCategoryId(), categoryMapper.selectAllCategories().get(0).getCategoryId());
+        assertEquals("YO, man", category.getCategoryId(), categoryMapper.selectCategory(category.getCategoryId()).getCategoryId());
+        categoryMapper.deleteCategory(categoryMapper.selectAllCategories().get(0));
+    }
 }

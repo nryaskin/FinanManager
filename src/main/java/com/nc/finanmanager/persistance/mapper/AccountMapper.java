@@ -5,6 +5,7 @@ import com.nc.finanmanager.persistance.entity.Currency;
 import com.nc.finanmanager.persistance.entity.Transaction;
 import com.nc.finanmanager.persistance.entity.User;
 import java.util.List;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Many;
 import org.apache.ibatis.annotations.One;
@@ -53,5 +54,6 @@ public interface AccountMapper {
     @Insert("INSERT INTO account(id, balance, username, current_id) VALUES(#{id}, #{balance}, #{user.username}, #{currency.currencyId})")
     void insertAccount(Account account);
     
-    
+    @Delete("DELETE FROM account WHERE id = #{id}")
+    void deleteAccount(Account account);
 }
