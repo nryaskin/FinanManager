@@ -3,33 +3,14 @@ package com.nc.finanmanager.persistance.entity;
 import java.util.List;
 
 public class Category {
-    private Integer cid;
-    private String categoryName;
-    private List<Item> items;
+    private String categoryId;
 
-    public List<Item> getItems() {
-        return items;
+    public String getCategoryId() {
+        return categoryId;
     }
 
-    public void setItems(List<Item> items) {
-        this.items = items;
-    }
-    
-    
-    public Integer getCid() {
-        return cid;
-    }
-
-    public void setCid(Integer cid) {
-        this.cid = cid;
-    }
-
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
+    public void setCategoryId(String categoryId) {
+        this.categoryId = categoryId;
     }
     
 }

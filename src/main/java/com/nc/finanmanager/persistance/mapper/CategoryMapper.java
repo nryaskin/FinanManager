@@ -13,7 +13,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 public interface CategoryMapper {
-    @Results({
+    /*@Results({
           @Result(property = "cid", column = "category_id"),
           @Result(property = "categoryName", column = "name")
         })
@@ -45,5 +45,5 @@ public interface CategoryMapper {
     
     
     @Select("SELECT * FROM items WHERE category_id=#{cid}")
-    List<Item> getItems(int cid);
+    List<Item> getItems(int cid);*/
 }

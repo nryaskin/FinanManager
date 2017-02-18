@@ -8,11 +8,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class BaseOperation {
         
-        @Autowired
-        CategoryMapper categoryMapper;
         
         public int size(Category category){
-            return categoryMapper.selectAllCategories().size();
+            return 0;
         }
        
         public int outcomeForCategory(Category category){

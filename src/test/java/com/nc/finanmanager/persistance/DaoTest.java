@@ -1,8 +1,14 @@
 package com.nc.finanmanager.persistance;
 
+import com.nc.finanmanager.persistance.entity.Account;
 import com.nc.finanmanager.persistance.entity.Category;
+import com.nc.finanmanager.persistance.entity.Currency;
+import com.nc.finanmanager.persistance.entity.User;
+import com.nc.finanmanager.persistance.mapper.AccountMapper;
 import com.nc.finanmanager.persistance.mapper.CategoryMapper;
+import com.nc.finanmanager.persistance.mapper.CurrencyMapper;
 import com.nc.finanmanager.persistance.mapper.ItemMapper;
+import com.nc.finanmanager.persistance.mapper.UserMapper;
 import junit.framework.Assert;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -41,27 +47,48 @@ public class DaoTest {
     
     @Test
     public void updateFirstCategoryTest(){
-        CategoryMapper categoryMapper = ctx.getBean(CategoryMapper.class);
+        /*CategoryMapper categoryMapper = ctx.getBean(CategoryMapper.class);
         Category category = categoryMapper.selectCategory(1);
         category.setCategoryName("food");
         categoryMapper.updateCategory(category);
         Assert.assertEquals("Not today","food", categoryMapper.selectCategory(1).getCategoryName());
-        
+        */
     }
     
     @Test
-    public void countItemsTest(){
-        ItemMapper itemMapper = ctx.getBean(ItemMapper.class);
-        Assert.assertEquals("Not today",12, itemMapper.selectItems().size());
-        
+    public void selectCurrencyTest(){
+        CurrencyMapper currencyMapper = ctx.getBean(CurrencyMapper.class);
+        Assert.assertEquals("No no no", "EURO", currencyMapper.selectAllCurrency().get(0).getType());
     }
     
     @Test
-    public void countItemsInCategoriesTest(){
-        CategoryMapper categoryMapper = ctx.getBean(CategoryMapper.class);
-        Category category  = categoryMapper.selectCategory(1);
-        Assert.assertEquals("Not today",12, category.getItems().size());
+    public void selectUserTest(){
+        UserMapper userMapper = ctx.getBean(UserMapper.class);        
+        Assert.assertEquals("Not today","Nikitos", userMapper.selectAllUsers().get(0).getUsername());
+    }
+
+    @Test
+    public void deleteCurrencyTest(){
+        CurrencyMapper currencyMapper = ctx.getBean(CurrencyMapper.class);
+        Assert.assertEquals("No no no", "EURO", currencyMapper.selectAllCurrency().get(0).getType());
+    }
+    
+    @Test
+    public void insertAccountTest(){
+        AccountMapper accountMapper = ctx.getBean(AccountMapper.class);
+        UserMapper userMapper = ctx.getBean(UserMapper.class);
+        CurrencyMapper currencyMapper = ctx.getBean(CurrencyMapper.class);
         
+        User user = userMapper.selectAllUsers().get(0);
+        Currency currency = currencyMapper.selectAllCurrency().get(0);
+        Account account = new Account();
+        account.setBalance(10000);
+        account.setCurrency(currency);
+        account.setUser(user);
+        account.setId("0000-0000-0000-0000");
+        accountMapper.insertAccount(account);
+        assertEquals("No no no", "0000-0000-0000-0000", accountMapper.selectAllAccounts().get(0).getId());
+        assertEquals("No no no", user.getUsername(), accountMapper.selectAllAccounts().get(0).getUser().getUsername());
     }
     
 }
