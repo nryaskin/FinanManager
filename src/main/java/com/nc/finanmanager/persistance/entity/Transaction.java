@@ -2,7 +2,7 @@ package com.nc.finanmanager.persistance.entity;
 
 public class Transaction {
     private Integer id;
-    private String username;
+    private User user;
     private Account source;
     private Account target;
     private Category category;
@@ -16,12 +16,12 @@ public class Transaction {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public User getUser() {
+        return user;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Account getSource() {
