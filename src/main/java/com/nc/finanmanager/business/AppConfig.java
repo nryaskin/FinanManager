@@ -2,17 +2,20 @@
 package com.nc.finanmanager.business;
 
 import com.nc.finanmanager.business.bean.BaseOperation;
+import com.nc.finanmanager.business.bean.TransactionManager;
+import com.nc.finanmanager.jsf.UserController;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 
 @Configuration
-@ComponentScan("com.nc.com.nc.finanmanager.business.bean")
+@ComponentScan({"com.nc.finanmanager.business.bean", "com.nc.finanmanager.jsf"})
 public class AppConfig {
-    @Bean
-    public BaseOperation getBaseOperation(){
-        return new BaseOperation();
+
+    @Bean 
+    public TransactionManager getTransactionManager(){
+        return new TransactionManager();
     }
     
 }

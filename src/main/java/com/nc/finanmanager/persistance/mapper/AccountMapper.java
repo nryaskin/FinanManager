@@ -18,7 +18,7 @@ public interface AccountMapper {
         @Result(property = "id", column = "id"),
         @Result(property = "balance", column = "balance"),
         @Result(property = "user", javaType = User.class, column = "username", one=@One(select = "getAccountsUser")),
-        @Result(property = "currency", javaType = Currency.class, column = "currency_id", one=@One(select = "getAccountsCurrency")),
+        @Result(property = "currency", javaType = Currency.class, column = "current_id", one=@One(select = "getAccountsCurrency")),
         @Result(property = "incomeTransaction", javaType = List.class, column = "id", many=@Many(select = "getIncomeTransactions")),
         @Result(property = "outcomeTransaction", javaType = List.class, column = "id", many=@Many(select = "getOutcomeTransactions"))
     })
@@ -29,7 +29,7 @@ public interface AccountMapper {
         @Result(property = "id", column = "id"),
         @Result(property = "balance", column = "balance"),
         @Result(property = "user", javaType = User.class, column = "username", one=@One(select = "getAccountsUser")),
-        @Result(property = "currency", javaType = Currency.class, column = "currency_id", one=@One(select = "getAccountsCurrency")),
+        @Result(property = "currency", javaType = Currency.class, column = "current_id", one=@One(select = "getAccountsCurrency")),
         @Result(property = "incomeTransaction", javaType = List.class, column = "id", many=@Many(select = "getIncomeTransactions")),
         @Result(property = "outcomeTransaction", javaType = List.class, column = "id", many=@Many(select = "getOutcomeTransactions"))
     })
@@ -40,7 +40,7 @@ public interface AccountMapper {
     @Select("Select * FROM users WHERE username = #{username}")
     User getAccountsUser(String username);
     
-    @Select("SELECT * FROM currency WHERE currency_id = #{currencyId}")
+    @Select("SELECT * FROM currency WHERE current_id = #{currencyId}")
     Currency getAccountsCurrency(Integer currencyId);
     
     @Select("SELECT * FROM transaction WHERE target = #{id}")

@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:icecore="http://www.icefaces.org/icefaces/core"
+      xmlns:ace="http://www.icefaces.org/icefaces/components"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title></title>
+    </h:head>
+    <h:body>
+        <ui:composition>
+            <h:form>
+                <ace:panel>
+                    <h:panelGrid id="createAccountGrid" columns="1">
+                        <h:outputText value="New account"/>
+                        <ace:textEntry id="idEntry" value="#{accountController.accountId}"
+                                       label="accountId" labelPosition="left"/>
+                        <br/>
+                        <ace:simpleSelectOneMenu id="selectUser" value="#{accountController.selectedUser.username}">
+                            <f:selectItems value="#{accountController.users}" var="user" itemLabel="#{user.username}" itemValue="#{user.username}"/>
+                        </ace:simpleSelectOneMenu>
+                        <ace:textEntry id="passwordEntry" value="#{accountController.balance}"
+                                       label="balance" labelPosition="left"/>
+                        <ace:pushButton id="addAccountButton" value="addAccount" actionListener="#{accountController.register}"/>
+                    </h:panelGrid>
+                </ace:panel>
+                
+                
+            </h:form>            
+        </ui:composition>
+    </h:body>
+</html>
+

@@ -2,12 +2,29 @@ package com.nc.finanmanager.persistance.entity;
 
 public class Transaction {
     private Integer id;
-    private User user;
     private Account source;
     private Account target;
     private Category category;
     private String state;
+    private Double cash;
 
+    public Double getCash() {
+        return cash;
+    }
+
+    public void setCash(Double cash) {
+        this.cash = cash;
+    }
+
+    public Currency getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(Currency currency) {
+        this.currency = currency;
+    }
+    private Currency currency;
+    
     public Integer getId() {
         return id;
     }
@@ -16,13 +33,6 @@ public class Transaction {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     public Account getSource() {
         return source;

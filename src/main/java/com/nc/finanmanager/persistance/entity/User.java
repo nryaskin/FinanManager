@@ -1,8 +1,9 @@
 package com.nc.finanmanager.persistance.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class User {
+public class User implements Serializable{
     private String username;
     private String password;
     
