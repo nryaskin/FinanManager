@@ -11,7 +11,8 @@
     </h:head>
     <h:body>
         <ui:composition>
-            <h:form>
+            <h:form prependId="false">
+                <ace:dialog id="addAccount" header="Add Account Dialog" width="400">
                 <ace:panel>
                     <h:panelGrid id="createAccountGrid" columns="1">
                         <h:outputText value="New account"/>
@@ -23,10 +24,12 @@
                         </ace:simpleSelectOneMenu>
                         <ace:textEntry id="passwordEntry" value="#{accountController.balance}"
                                        label="balance" labelPosition="left"/>
+                        <h:commandButton id="addAccountCommandButton" value="addAccount" actionListener="#{accountController.register}" onclick="ice.ace.instance('addAccount').hide()"/>
                         <ace:pushButton id="addAccountButton" value="addAccount" actionListener="#{accountController.register}"/>
+                        
                     </h:panelGrid>
                 </ace:panel>
-                
+                </ace:dialog>
                 
             </h:form>            
         </ui:composition>
