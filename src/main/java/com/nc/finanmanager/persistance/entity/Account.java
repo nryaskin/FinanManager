@@ -1,8 +1,9 @@
 package com.nc.finanmanager.persistance.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Account {
+public class Account{
     
     private String id;
     private User user;

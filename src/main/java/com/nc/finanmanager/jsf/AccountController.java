@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
 
-@ManagedBean(name="transactionController", eager = true)
+@ManagedBean(name="accountController", eager = true)
 @RequestScoped
 @Component
 public class AccountController implements Serializable {

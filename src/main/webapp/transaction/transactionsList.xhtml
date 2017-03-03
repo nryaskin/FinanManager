@@ -10,7 +10,39 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        Hello from Facelets
-    </h:body>
-</html>
+        <ui:composition>
+            <h:form id="transactionForm">
+                <ace:dataTable id="transactionTable"
+                               value="#{transactionController.transactions}"
+                               var="transaction"
+                               paginator="true"
+                               paginatorPosition="bottom"
+                               rows="10"
+                               >
+                    <ace:column id="id" headerText="ID" sortBy="#{transaction.id}"
+                                filterBy="#{transaction.id}" filterMatchMode="contains">
+                        <h:outputText id="idCell" value="#{transaction.id}"/>
+                    </ace:column>
+                    <ace:column id="category" headerText="category" sortBy="#{transaction.category}"
+                                filterBy="#{transaction.category}" filterMatchMode="contains">
+                        <h:outputText id="categoryCell" value="#{transaction.category}"/>
+                    </ace:column>       
+
+                    <ace:column id="balance" headerText="transferedMoney" sortBy="#{transaction.cash}"
+                                filterBy="#{transaction.cash}" filterMatchMode="contains">
+                        <h:outputText id="cashCell" value="#{transaction.cash}"/>
+                    </ace:column>       
+                    <ace:column id="state" headerText="state" sortBy="#{transaction.state}"
+                                filterBy="#{transaction.state}" filterMatchMode="contains">
+                        <h:outputText id="stateCell" value="#{transaction.state}"/>
+                    </ace:column>
+                    <ace:column id="options" headerText="Options">
+                        <h:commandButton id="deleteAccountButton" actionListener="#{transactionController.deleteVirtualTransaction}">
+                            <f:param name="id" value="#{transaction.id}"/>
+                        </h:commandButton>
+                    </ace:column>
+                </ace:dataTable>
+            </h:form>
+        </ui:composition>
+    </h:body></html>
 

@@ -2,6 +2,7 @@
 package com.nc.finanmanager.business;
 
 import com.nc.finanmanager.business.bean.BaseOperation;
+import com.nc.finanmanager.business.bean.Reconciler;
 import com.nc.finanmanager.business.bean.TransactionManager;
 import com.nc.finanmanager.jsf.UserController;
 import org.springframework.context.annotation.Bean;
@@ -16,6 +17,11 @@ public class AppConfig {
     @Bean 
     public TransactionManager getTransactionManager(){
         return new TransactionManager();
+    }
+    
+    @Bean
+    public Reconciler getReconciler(){
+        return new Reconciler();
     }
     
 }
