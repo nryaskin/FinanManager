@@ -1,6 +1,8 @@
 package com.nc.finanmanager.persistance.entity;
 
-public class Transaction {
+import java.io.Serializable;
+
+public class Transaction  implements Serializable {
     private Integer id;
     private Account source;
     private Account target;

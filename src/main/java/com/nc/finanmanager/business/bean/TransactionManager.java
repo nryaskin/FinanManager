@@ -2,6 +2,7 @@ package com.nc.finanmanager.business.bean;
 
 import com.nc.finanmanager.persistance.entity.Account;
 import com.nc.finanmanager.persistance.entity.Transaction;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class TransactionManager {
+public class TransactionManager implements Serializable {
 
     class NextPrevAccount {
 

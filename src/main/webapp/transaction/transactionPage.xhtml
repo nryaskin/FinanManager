@@ -20,9 +20,11 @@
                 <ui:include src="createTransaction.xhtml" />
             </ui:insert>
         </div>
-        <
+        <h:form>
+        <h:outputText id="stateCell" value="#{transactionController.statr}"/>
         <h:commandButton id="show" value="addTrasaction" onclick="ice.ace.instance('addTransaction').show();" type="button"/>
-        <h:commandButton id="execute" value="executeTransactions" actionListener="#{transactionController.performTransaction}" type="button"/>
+        <ace:pushButton value="PerformTransaction" actionListener="#{transactionController.performTransaction}"/>
         <h:commandButton value="Back to Homepage"/>
+        </h:form>
     </h:body>
 </html>

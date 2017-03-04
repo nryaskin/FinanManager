@@ -1,6 +1,8 @@
 package com.nc.finanmanager.persistance.entity;
 
-public class Currency {
+import java.io.Serializable;
+
+public class Currency implements Serializable {
     private Integer currencyId;
     private String type;
 

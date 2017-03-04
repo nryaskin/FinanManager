@@ -1,8 +1,9 @@
 package com.nc.finanmanager.persistance.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Category {
+public class Category  implements Serializable {
     private String categoryId;
 
     public String getCategoryId() {
