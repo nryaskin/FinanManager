@@ -14,7 +14,7 @@
         <ui:composition>
             <h:form id="transactionHistoryForm">
                 <ace:dataTable id="transactionHistoryTable"
-                               value="#{transactionController.historyTransactions}"
+                               value="#{transactionHistoryController.transactionsHistoryList}"
                                var="transaction"
                                paginator="true"
                                paginatorPosition="bottom"
@@ -38,18 +38,13 @@
                         <h:outputText id="stateCell" value="#{transaction.state}"/>
                     </ace:column>
                     
-                    <ace:column id="sourceBalance" headerText="source" sortBy="#{transaction.source.balance}"
-                                filterBy="#{transaction.source.balance}" filterMatchMode="contains">
-                        <h:outputText id="sourceCell" value="#{transaction.source.balance}"/>
+                    <ace:column id="sourceId" headerText="source" sortBy="#{transaction.source.id}"
+                                filterBy="#{transaction.source.id}" filterMatchMode="contains">
+                        <h:outputText id="sourceCell" value="#{transaction.source.id}"/>
                     </ace:column>       
-                    <ace:column id="targetBalance" headerText="target" sortBy="#{transaction.target.balance}"
-                                filterBy="#{transaction.target.balance}" filterMatchMode="contains">
-                        <h:outputText id="targetCell" value="#{transaction.target.balance}"/>
-                    </ace:column>
-                    <ace:column id="options" headerText="Options">
-                        <h:commandButton id="deleteAccountButton" actionListener="#{transactionController.deleteVirtualTransaction}">
-                            <f:param name="id" value="#{transaction.id}"/>
-                        </h:commandButton>
+                    <ace:column id="targetId" headerText="target" sortBy="#{transaction.target.id}"
+                                filterBy="#{transaction.target.id}" filterMatchMode="contains">
+                        <h:outputText id="targetCell" value="#{transaction.target.id}"/>
                     </ace:column>
                 </ace:dataTable>
             </h:form>

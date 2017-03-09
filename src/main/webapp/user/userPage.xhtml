@@ -10,20 +10,28 @@
         <title>Users Management Page</title>
     </h:head>
     <h:body>
-        <div id="usersList">
-            <ui:insert name="usersList" >
-                <ui:include src="usersList.xhtml" />
-            </ui:insert>
-        </div>
-        <div id="createUser">
-            <ui:insert name="createUser" >
-                <ui:include src="createUser.xhtml" />
-            </ui:insert>
-        </div>
 
-        <h:form>
-        <h:commandButton value="Back to Homepage"/>
-        </h:form>
+        <h:panelGrid columns="2">
+            <h:column>
+                <div id="mainmenu">
+                    <ui:insert name="mainmenu" >
+                        <ui:include src="../menu/main.xhtml" />
+                    </ui:insert>
+                </div>    
+            </h:column>
+            <h:column>
+                <div id="usersList">
+                    <ui:insert name="usersList" >
+                        <ui:include src="usersList.xhtml" />
+                    </ui:insert>
+                </div>
+                <div id="createUser">
+                    <ui:insert name="createUser" >
+                        <ui:include src="createUser.xhtml" />
+                    </ui:insert>
+                </div>
+            </h:column>
+        </h:panelGrid>
     </h:body>
 </html>
 

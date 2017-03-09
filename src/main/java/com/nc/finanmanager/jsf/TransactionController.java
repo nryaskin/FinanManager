@@ -115,7 +115,9 @@ public class TransactionController implements Serializable {
         statr = "youootuot";
         transactionManager.addTransactions(transactions);
         transactionManager.begin();
-        transactionManager.commit();
+        if (transactionManager.getState() == "success") {
+            transactionManager.commit();
+        }
         statr += "hi" + transactionManager.getState();
     }
 

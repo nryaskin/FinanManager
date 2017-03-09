@@ -7,7 +7,7 @@
       xmlns:icecore="http://www.icefaces.org/icefaces/core"
       xmlns:ace="http://www.icefaces.org/icefaces/components">
     <h:head>
-        <title>Transaction Management Page</title>
+        <title>Transaction History Page</title>
     </h:head>
     <h:body>
         <h:panelGrid columns="2">
@@ -19,21 +19,11 @@
                 </div>    
             </h:column>
             <h:column>
-            <div id="transactionsList">
-                <ui:insert name="virtualTransactionsList" >
-                    <ui:include src="virtualTransactionsList.xhtml" />
+            <div id="transactionsHistory">
+                <ui:insert name="history" >
+                    <ui:include src="transactionHistory.xhtml" />
                 </ui:insert>
             </div>
-            <div id="createTrasnaction">
-                <ui:insert name="createTransaction" >
-                    <ui:include src="createTransaction.xhtml" />
-                </ui:insert>
-            </div>
-            <h:form>
-                <h:outputText id="stateCell" value="#{transactionController.statr}"/>
-                <h:commandButton id="show" value="addTrasaction" onclick="ice.ace.instance('addTransaction').show();" type="button"/>
-                <ace:pushButton value="PerformTransaction" actionListener="#{transactionController.performTransaction}"/>
-            </h:form>
             </h:column>
         </h:panelGrid>
     </h:body>

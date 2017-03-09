@@ -2,6 +2,8 @@ package com.nc.finanmanager.business.bean;
 
 import com.nc.finanmanager.persistance.entity.Account;
 import com.nc.finanmanager.persistance.entity.Transaction;
+import com.nc.finanmanager.persistance.mapper.AccountMapper;
+import com.nc.finanmanager.persistance.mapper.TransactionMapper;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,7 +19,7 @@ public class TransactionManager implements Serializable {
 
         public Account origin;
         public Account copy;
-
+        
         private void initCopy() {
             copy = new Account();
             copy.setBalance(origin.getBalance());
@@ -27,6 +29,26 @@ public class TransactionManager implements Serializable {
         }
     }
 
+    private TransactionMapper transactionMapper;
+    private AccountMapper accountMapper;
+
+    public AccountMapper getAccountMapper() {
+        return accountMapper;
+    }
+    @Autowired
+    public void setAccountMapper(AccountMapper accountMapper) {
+        this.accountMapper = accountMapper;
+    }
+
+    public TransactionMapper getTransactionMapper() {
+        return transactionMapper;
+    }
+    @Autowired
+    public void setTransactionMapper(TransactionMapper transactionMapper) {
+        this.transactionMapper = transactionMapper;
+    }
+
+    
     private CurrencyConverter currencyConverter;
 
     public CurrencyConverter getCurrencyConverter() {
@@ -124,16 +146,20 @@ public class TransactionManager implements Serializable {
     }
     
     public void commit(){
+        for(Map.Entry<String, NextPrevAccount> entry : accountMap.entrySet()){
+             accountMapper.updateAccount(entry.getValue().copy);
+        }
         for (Transaction transaction : transactions) {
             transaction.setSource(accountMap.get(transaction.getSource().getId()).copy);
             transaction.setTarget(accountMap.get(transaction.getTarget().getId()).copy);
+            transactionMapper.insertTransaction(transaction);
         }
     }
     
     public void rollback(){
         for (Transaction transaction : transactions) {
-            transaction.setSource(accountMap.get(transaction.getSource().getId()).copy);
-            transaction.setTarget(accountMap.get(transaction.getTarget().getId()).copy);
+            transaction.setSource(accountMap.get(transaction.getSource().getId()).origin);
+            transaction.setTarget(accountMap.get(transaction.getTarget().getId()).origin);
         }
     }    
 }

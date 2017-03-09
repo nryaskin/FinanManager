@@ -10,18 +10,29 @@
         <title>Account Management Page</title>
     </h:head>
     <h:body>
-        <div id="accountList">
-            <ui:insert name="accountList" >
-                <ui:include src="accountList.xhtml" />
-            </ui:insert>
-        </div>
-        <div id="createAccount">
-            <ui:insert name="createAccount" >
-                <ui:include src="createAccount.xhtml" />
-            </ui:insert>
-        </div>
-        <h:commandButton id="show" value="addAccount" onclick="ice.ace.instance('addAccount').show();" type="button"/>
-        <h:commandButton value="Back to Homepage"/>
+
+        <h:panelGrid columns="2">
+            <h:column>
+                <div id="mainmenu">
+                    <ui:insert name="mainmenu" >
+                        <ui:include src="../menu/main.xhtml" />
+                    </ui:insert>
+                </div>    
+            </h:column>
+            <h:column>
+                <div id="accountList">
+                    <ui:insert name="accountList" >
+                        <ui:include src="accountList.xhtml" />
+                    </ui:insert>
+                </div>
+                <div id="createAccount">
+                    <ui:insert name="createAccount" >
+                        <ui:include src="createAccount.xhtml" />
+                    </ui:insert>
+                </div>
+                <h:commandButton id="show" value="addAccount" onclick="ice.ace.instance('addAccount').show();" type="button"/>
+            </h:column>
+        </h:panelGrid>
     </h:body>
 </html>
 

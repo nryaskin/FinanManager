@@ -12,6 +12,7 @@ import org.apache.ibatis.annotations.One;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 public interface AccountMapper {
     @Results({
@@ -49,6 +50,8 @@ public interface AccountMapper {
     @Select("SELECT * FROM transaction WHERE source = #{id}")
     List<Transaction> getOutcomeTransactions(String id);
     
+    @Update("UPDATE account SET balance=#{balance} WHERE id=#{id}")
+    void updateAccount(Account account);
     
     
     @Insert("INSERT INTO account(id, balance, username, current_id) VALUES(#{id}, #{balance}, #{user.username}, #{currency.currencyId})")

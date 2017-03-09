@@ -6,11 +6,12 @@ import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @ManagedBean(name = "transactionHistoryController", eager = true)
-@SessionScoped
+@ViewScoped
 @Component
 public class TransactionHistoryController implements Serializable {
     
@@ -31,4 +32,6 @@ public class TransactionHistoryController implements Serializable {
         this.transactionMapper = transactionMapper;
         transactionsHistoryList = transactionMapper.selectAllTransactions();
     }
+    
+    
 }
