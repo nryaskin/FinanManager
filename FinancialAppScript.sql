@@ -34,3 +34,7 @@ constraint fk_source foreign key (source) references account(id) on update casca
 constraint fk_target foreign key (target) references account(id) on update cascade on delete cascade,
 constraint fk_category_id foreign key (category_id) references category(id_category) on update cascade on delete cascade
 );
+
+INSERT INTO currency(type) VALUES('EURO');
+INSERT INTO currency(type) VALUES('DOLLAR');
+INSERT INTO currency(type) VALUES('RUBLE');
