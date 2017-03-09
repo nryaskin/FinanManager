@@ -2,8 +2,10 @@ package com.nc.finanmanager.jsf;
 
 import com.nc.finanmanager.persistance.MyBatisConfig;
 import com.nc.finanmanager.persistance.entity.Account;
+import com.nc.finanmanager.persistance.entity.Currency;
 import com.nc.finanmanager.persistance.entity.User;
 import com.nc.finanmanager.persistance.mapper.AccountMapper;
+import com.nc.finanmanager.persistance.mapper.CurrencyMapper;
 import com.nc.finanmanager.persistance.mapper.UserMapper;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -23,10 +25,29 @@ public class AccountController implements Serializable {
     
     private List<Account> accountsList;
 
+    private Account account;
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
     private UserMapper userMapper;
     private AccountMapper accountMapper;
+    private CurrencyMapper currencyMapper;
     private User selectedUser;
+    private List<Currency> currencies;
 
+    public List<Currency> getCurrencies() {
+        return currencies;
+    }
+
+    public void setCurrencies(List<Currency> currencies) {
+        this.currencies = currencies;
+    }
+    
     public User getSelectedUser() {
         return selectedUser;
     }
@@ -39,11 +60,16 @@ public class AccountController implements Serializable {
         AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
         ctx.register(MyBatisConfig.class);
         ctx.refresh();
+        account = new Account();
+        account.setUser(new User());
+        account.setCurrency(new Currency());
         userMapper = ctx.getBean(UserMapper.class);
         this.users = userMapper.selectAllUsers();
         accountMapper = ctx.getBean(AccountMapper.class);
         accountsList = accountMapper.selectAllAccounts();
         selectedUser = new User();
+        currencyMapper = ctx.getBean(CurrencyMapper.class);
+        currencies = currencyMapper.selectAllCurrency();
     }
     
     public List<User> getUsers() {
@@ -86,10 +112,10 @@ public class AccountController implements Serializable {
     }
     
     public void register(){
-        Account account = new Account();
+        /*Account account = new Account();
         account.setId(accountId);
         account.setBalance(balance);
-        account.setUser(selectedUser);
+        account.setUser(selectedUser);*/
         accountMapper.insertAccount(account);
         accountsList = accountMapper.selectAllAccounts();
     }

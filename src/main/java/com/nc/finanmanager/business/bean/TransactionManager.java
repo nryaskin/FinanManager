@@ -27,6 +27,17 @@ public class TransactionManager implements Serializable {
         }
     }
 
+    private CurrencyConverter currencyConverter;
+
+    public CurrencyConverter getCurrencyConverter() {
+        return currencyConverter;
+    }
+
+    @Autowired
+    public void setCurrencyConverter(CurrencyConverter currencyConverter) {
+        this.currencyConverter = currencyConverter;
+    }
+    
     private Reconciler reconciler;
 
     public Reconciler getReconciler() {
@@ -107,7 +118,7 @@ public class TransactionManager implements Serializable {
             iExceptions = transaction;
         } else {
             source.setBalance(source.getBalance() - money);
-            target.setBalance(target.getBalance() + money);
+            target.setBalance(target.getBalance() + currencyConverter.convert(source.getCurrency(), target.getCurrency(), money));
             transaction.setState("success");
         }
     }

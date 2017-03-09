@@ -16,13 +16,16 @@
                 <ace:panel>
                     <h:panelGrid id="createAccountGrid" columns="1">
                         <h:outputText value="New account"/>
-                        <ace:textEntry id="idEntry" value="#{accountController.accountId}"
+                        <ace:textEntry id="idEntry" value="#{accountController.account.id}"
                                        label="accountId" labelPosition="left"/>
                         <br/>
-                        <ace:simpleSelectOneMenu id="selectUser" value="#{accountController.selectedUser.username}">
+                        <ace:simpleSelectOneMenu id="selectUser" value="#{accountController.account.user.username}">
                             <f:selectItems value="#{accountController.users}" var="user" itemLabel="#{user.username}" itemValue="#{user.username}"/>
                         </ace:simpleSelectOneMenu>
-                        <ace:textEntry id="passwordEntry" value="#{accountController.balance}"
+                        <ace:simpleSelectOneMenu id="selectCurrency" value="#{accountController.account.currency.currencyId}">
+                            <f:selectItems value="#{accountController.currencies}" var="currency" itemLabel="#{currency.type}" itemValue="#{currency.currencyId}"/>
+                        </ace:simpleSelectOneMenu>
+                        <ace:textEntry id="balanceEntry" value="#{accountController.account.balance}"
                                        label="balance" labelPosition="left"/>
                         <h:commandButton id="addAccountCommandButton" value="addAccount" actionListener="#{accountController.register}" onclick="ice.ace.instance('addAccount').hide()"/>
                         <ace:pushButton id="addAccountButton" value="addAccount" actionListener="#{accountController.register}"/>

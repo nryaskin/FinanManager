@@ -25,6 +25,17 @@ public class DaoTest {
 
     public DaoTest() {
     }
+//    
+//    @Test
+//    public void setCurrency(){
+//        CurrencyMapper currencyMapper = ctx.getBean(CurrencyMapper.class);
+//        Currency currency = new Currency();
+//        currency.setType("DOLLAR");
+//        currencyMapper.insertCurrency(currency);
+//        Currency currency1 = new Currency();
+//        currency1.setType("RUBLE");
+//        currencyMapper.insertCurrency(currency1);
+//    }
 
 //    @BeforeClass
 //    public static void setUpClass() {
@@ -33,7 +44,7 @@ public class DaoTest {
 //    @AfterClass
 //    public static void tearDownClass() {
 //    }
-//
+////
 //    @Before
 //    public void setUp() {
 //        ctx = new AnnotationConfigApplicationContext();

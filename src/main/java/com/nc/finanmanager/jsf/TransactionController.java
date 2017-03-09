@@ -1,5 +1,6 @@
 package com.nc.finanmanager.jsf;
 
+import com.nc.finanmanager.business.bean.Reconciler;
 import com.nc.finanmanager.business.bean.TransactionManager;
 import com.nc.finanmanager.persistance.entity.Account;
 import com.nc.finanmanager.persistance.entity.Transaction;
@@ -27,6 +28,14 @@ public class TransactionController implements Serializable {
     private List<Account> accounts;
     private AccountMapper accountMapper;
 
+    public List<Account> getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(List<Account> accounts) {
+        this.accounts = accounts;
+    }
+
     private void initTransaction() {
         selectedTransaction = new Transaction();
         selectedTransaction.setId(UUID.randomUUID().hashCode());
@@ -41,15 +50,7 @@ public class TransactionController implements Serializable {
         initTransaction();
         transactions = new ArrayList<Transaction>();
         accounts = accountMapper.selectAllAccounts();
-        statr="no";
-    }
-
-    public List<Account> getAccounts() {
-        return accounts;
-    }
-
-    public void setAccounts(List<Account> accounts) {
-        this.accounts = accounts;
+        statr = "no";
     }
 
     public Transaction getSelectedTransaction() {
@@ -77,8 +78,20 @@ public class TransactionController implements Serializable {
         this.transactionManager = transactionManager;
     }
 
+    private Reconciler reconciler;
+
+    public Reconciler getReconciler() {
+        return reconciler;
+    }
+
+    @Autowired
+    public void setReconciler(Reconciler reconciler) {
+        this.reconciler = reconciler;
+    }
+
     public void addVirtualTransaction() {
         transactions.add(selectedTransaction);
+        reconciler.reconcilTransactionUnits(selectedTransaction);
         initTransaction();
     }
 
@@ -91,21 +104,19 @@ public class TransactionController implements Serializable {
                 break;
             }
         }
-        if(transactionToRemove != null)
+        if (transactionToRemove != null) {
             transactions.remove(transactionToRemove);
+        }
 
         statr = "delete" + id;
     }
 
-    public void tutturu(){
-        statr = "tutturu";
-    }
-    
     public void performTransaction() {
         statr = "youootuot";
         transactionManager.addTransactions(transactions);
         transactionManager.begin();
-        statr += "hi"+transactionManager.getState();
+        transactionManager.commit();
+        statr += "hi" + transactionManager.getState();
     }
 
     private String statr;

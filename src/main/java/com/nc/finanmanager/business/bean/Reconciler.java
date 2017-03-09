@@ -27,6 +27,6 @@ public class Reconciler {
     
     public void reconcilTransactionUnits(Transaction transaction){
      transaction.setSource(accountMapper.selectAccount(transaction.getSource().getId()));
-     transaction.setTarget(accountMapper.selectAccount(transaction.getSource().getId()));
+     transaction.setTarget(accountMapper.selectAccount(transaction.getTarget().getId()));
     }
 }

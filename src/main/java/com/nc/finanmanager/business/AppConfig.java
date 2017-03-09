@@ -2,6 +2,8 @@
 package com.nc.finanmanager.business;
 
 import com.nc.finanmanager.business.bean.BaseOperation;
+import com.nc.finanmanager.business.bean.CurrencyConverter;
+import com.nc.finanmanager.business.bean.CurrencyConverterImpl;
 import com.nc.finanmanager.business.bean.Reconciler;
 import com.nc.finanmanager.business.bean.TransactionManager;
 import com.nc.finanmanager.jsf.UserController;
@@ -24,4 +26,8 @@ public class AppConfig {
         return new Reconciler();
     }
     
+    @Bean
+    public CurrencyConverter getCurrencyConverter(){
+        return new CurrencyConverterImpl();
+    }
 }

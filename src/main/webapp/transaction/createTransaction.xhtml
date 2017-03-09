@@ -20,10 +20,10 @@
                                        label="transactionMoney" labelPosition="left"/>
                         <br/>
                         <ace:simpleSelectOneMenu id="selectSource" value="#{transactionController.selectedTransaction.source.id}">
-                            <f:selectItems value="#{transactionController.accounts}" var="account" itemLabel="#{account.id}" itemValue="#{account.id}"/>
+                            <f:selectItems value="#{transactionController.accounts}" var="source" itemLabel="#{source.id}" itemValue="#{source.id}"/>
                         </ace:simpleSelectOneMenu>
                         <ace:simpleSelectOneMenu id="selectTarget" value="#{transactionController.selectedTransaction.target.id}">
-                            <f:selectItems value="#{transactionController.accounts}" var="account" itemLabel="#{account.id}" itemValue="#{account.id}"/>
+                            <f:selectItems value="#{transactionController.accounts}" var="target" itemLabel="#{target.id}" itemValue="#{target.id}"/>
                         </ace:simpleSelectOneMenu>
                         
                         <h:commandButton id="addAccountCommandButton" value="addTransaction" actionListener="#{transactionController.addVirtualTransaction()}" onclick="ice.ace.instance('addTransaction').hide()"/>

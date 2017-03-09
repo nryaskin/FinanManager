@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:icecore="http://www.icefaces.org/icefaces/core"
+      xmlns:ace="http://www.icefaces.org/icefaces/components">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition>
+            <h:form id="transactionForm">
+                <ace:dataTable id="transactionTable"
+                               value="#{transactionController.transactions}"
+                               var="transaction"
+                               paginator="true"
+                               paginatorPosition="bottom"
+                               rows="10"
+                               >
+                    <ace:column id="id" headerText="ID" sortBy="#{transaction.id}"
+                                filterBy="#{transaction.id}" filterMatchMode="contains">
+                        <h:outputText id="idCell" value="#{transaction.id}"/>
+                    </ace:column>
+                    <ace:column id="category" headerText="category" sortBy="#{transaction.category}"
+                                filterBy="#{transaction.category}" filterMatchMode="contains">
+                        <h:outputText id="categoryCell" value="#{transaction.category}"/>
+                    </ace:column>       
+
+                    <ace:column id="balance" headerText="transferedMoney" sortBy="#{transaction.cash}"
+                                filterBy="#{transaction.cash}" filterMatchMode="contains">
+                        <h:outputText id="cashCell" value="#{transaction.cash}"/>
+                    </ace:column>       
+                    <ace:column id="state" headerText="state" sortBy="#{transaction.state}"
+                                filterBy="#{transaction.state}" filterMatchMode="contains">
+                        <h:outputText id="stateCell" value="#{transaction.state}"/>
+                    </ace:column>
+                    
+                    <ace:column id="sourceBalance" headerText="source" sortBy="#{transaction.source.balance}"
+                                filterBy="#{transaction.source.balance}" filterMatchMode="contains">
+                        <h:outputText id="sourceCell" value="#{transaction.source.balance}"/>
+                    </ace:column>       
+                    <ace:column id="targetBalance" headerText="target" sortBy="#{transaction.target.balance}"
+                                filterBy="#{transaction.target.balance}" filterMatchMode="contains">
+                        <h:outputText id="targetCell" value="#{transaction.target.balance}"/>
+                    </ace:column>
+                    <ace:column id="options" headerText="Options">
+                        <h:commandButton id="deleteAccountButton" actionListener="#{transactionController.deleteVirtualTransaction}">
+                            <f:param name="id" value="#{transaction.id}"/>
+                        </h:commandButton>
+                    </ace:column>
+                </ace:dataTable>
+            </h:form>
+        </ui:composition>
+    </h:body></html>
+

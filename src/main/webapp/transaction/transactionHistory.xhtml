@@ -7,13 +7,14 @@
       xmlns:icecore="http://www.icefaces.org/icefaces/core"
       xmlns:ace="http://www.icefaces.org/icefaces/components">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Transaction History</title>
     </h:head>
     <h:body>
+        
         <ui:composition>
-            <h:form id="transactionForm">
-                <ace:dataTable id="transactionTable"
-                               value="#{transactionController.transactions}"
+            <h:form id="transactionHistoryForm">
+                <ace:dataTable id="transactionHistoryTable"
+                               value="#{transactionController.historyTransactions}"
                                var="transaction"
                                paginator="true"
                                paginatorPosition="bottom"
@@ -36,6 +37,15 @@
                                 filterBy="#{transaction.state}" filterMatchMode="contains">
                         <h:outputText id="stateCell" value="#{transaction.state}"/>
                     </ace:column>
+                    
+                    <ace:column id="sourceBalance" headerText="source" sortBy="#{transaction.source.balance}"
+                                filterBy="#{transaction.source.balance}" filterMatchMode="contains">
+                        <h:outputText id="sourceCell" value="#{transaction.source.balance}"/>
+                    </ace:column>       
+                    <ace:column id="targetBalance" headerText="target" sortBy="#{transaction.target.balance}"
+                                filterBy="#{transaction.target.balance}" filterMatchMode="contains">
+                        <h:outputText id="targetCell" value="#{transaction.target.balance}"/>
+                    </ace:column>
                     <ace:column id="options" headerText="Options">
                         <h:commandButton id="deleteAccountButton" actionListener="#{transactionController.deleteVirtualTransaction}">
                             <f:param name="id" value="#{transaction.id}"/>
@@ -44,5 +54,6 @@
                 </ace:dataTable>
             </h:form>
         </ui:composition>
-    </h:body></html>
+    </h:body>
+</html>
 
