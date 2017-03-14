@@ -28,10 +28,11 @@
                     <ace:column id="balance" headerText="transferedMoney" sortBy="#{transaction.cash}"
                                 filterBy="#{transaction.cash}" filterMatchMode="contains">
                         <h:outputText id="cashCell" value="#{transaction.cash}"/>
-                    </ace:column>       
-                    <ace:column id="state" headerText="state" sortBy="#{transaction.state}"
-                                filterBy="#{transaction.state}" filterMatchMode="contains">
-                        <h:outputText id="stateCell" value="#{transaction.state}"/>
+                    </ace:column>
+
+                    <ace:column id="date" headerText="executed" sortBy="#{transaction.date}"
+                                filterBy="#{transaction.date}" filterMatchMode="contains">
+                        <h:outputText id="dateCell" value="#{transaction.date}"/>
                     </ace:column>
                     
                     <ace:column id="sourceId" headerText="source" sortBy="#{transaction.source.id}"

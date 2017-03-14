@@ -1,6 +1,7 @@
 package com.nc.finanmanager.persistance.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.UUID;
 
 public class Transaction  implements Serializable {
@@ -10,6 +11,15 @@ public class Transaction  implements Serializable {
     private Category category;
     private String state;
     private Double cash;
+    private Date date;
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 
     public Transaction(){       
         this.setId(UUID.randomUUID().hashCode());

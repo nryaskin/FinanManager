@@ -112,6 +112,7 @@ public class AccountController implements Serializable {
     public void register(){
         accountMapper.insertAccount(account);
         accountsList = accountMapper.selectAllAccounts();
+        account = new Account();
     }
     
     public void delete(){

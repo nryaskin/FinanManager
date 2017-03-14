@@ -19,6 +19,7 @@ public interface TransactionMapper {
         @Result(property = "id", column="id"),
         @Result(property="state", column = "state"),
         @Result(property="cash", column = "cash"),
+        @Result(property="date", column = "transaction_date"),
         @Result(property = "source", javaType = Account.class, column = "source" , one=@One(select = "selectAccount")),
         @Result(property = "target", javaType = Account.class, column = "target" , one=@One(select = "selectAccount")),
         @Result(property = "category", javaType = Category.class, column = "category_id", one=@One(select = "selectCategory")),
@@ -31,6 +32,7 @@ public interface TransactionMapper {
         @Result(property = "id", column="id"),
         @Result(property="state", column = "state"),
         @Result(property="cash", column = "cash"),
+        @Result(property="date", column = "transaction_date"),
         @Result(property = "source", javaType = Account.class, column = "source" , one=@One(select = "selectAccount")),
         @Result(property = "target", javaType = Account.class, column = "target" , one=@One(select = "selectAccount")),
         @Result(property = "category", javaType = Category.class, column = "category_id", one=@One(select = "selectCategory")),
@@ -43,7 +45,7 @@ public interface TransactionMapper {
     Currency getTransactionCurrency(Integer currencyId);
     
     @Select("SELECT * FROM account WHERE id=#{accountId}")
-    Account selectAccount(String accountId);
+    Account selectAccount(String accountId);    
     
     @Results({
         @Result(property = "categoryId", column = "id_category")
@@ -51,7 +53,7 @@ public interface TransactionMapper {
     @Select("SELECT * FROM category WHERE id_category = #{categoryId}")
     Category selectCategory(String categoryId);
     
-    @Insert("INSERT INTO transaction(source, target, cash, category_id, state, current_id) VALUES(#{source.id}, #{target.id}, #{cash}, #{category.categoryId}, #{state}, #{currency.currencyId})")
+    @Insert("INSERT INTO transaction(source, target, cash, transaction_date, category_id, state, current_id) VALUES(#{source.id}, #{target.id}, #{cash}, CURRENT_TIMESTAMP, #{category.categoryId}, #{state}, #{currency.currencyId})")
     void insertTransaction(Transaction transaction);
     
     
