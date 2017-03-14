@@ -22,6 +22,8 @@ public interface CategoryMapper {
     @Results({
         @Result(property = "categoryId", column="id_category")
     })
+    
+    
     @Select("SELECT  * FROM category")
     List<Category> selectAllCategories();
     

@@ -3,6 +3,7 @@ package com.nc.finanmanager.business.bean;
 import com.nc.finanmanager.persistance.entity.Account;
 import com.nc.finanmanager.persistance.entity.Transaction;
 import com.nc.finanmanager.persistance.mapper.AccountMapper;
+import com.nc.finanmanager.persistance.mapper.CategoryMapper;
 import com.nc.finanmanager.persistance.mapper.TransactionMapper;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class TransactionManager implements Serializable {
 
         public Account origin;
         public Account copy;
-        
+
         private void initCopy() {
             copy = new Account();
             copy.setBalance(origin.getBalance());
@@ -32,9 +33,20 @@ public class TransactionManager implements Serializable {
     private TransactionMapper transactionMapper;
     private AccountMapper accountMapper;
 
+    public CategoryMapper getCategoryMapper() {
+        return categoryMapper;
+    }
+
+    @Autowired
+    public void setCategoryMapper(CategoryMapper categoryMapper) {
+        this.categoryMapper = categoryMapper;
+    }
+    private CategoryMapper categoryMapper;
+
     public AccountMapper getAccountMapper() {
         return accountMapper;
     }
+
     @Autowired
     public void setAccountMapper(AccountMapper accountMapper) {
         this.accountMapper = accountMapper;
@@ -43,12 +55,12 @@ public class TransactionManager implements Serializable {
     public TransactionMapper getTransactionMapper() {
         return transactionMapper;
     }
+
     @Autowired
     public void setTransactionMapper(TransactionMapper transactionMapper) {
         this.transactionMapper = transactionMapper;
     }
 
-    
     private CurrencyConverter currencyConverter;
 
     public CurrencyConverter getCurrencyConverter() {
@@ -59,7 +71,7 @@ public class TransactionManager implements Serializable {
     public void setCurrencyConverter(CurrencyConverter currencyConverter) {
         this.currencyConverter = currencyConverter;
     }
-    
+
     private Reconciler reconciler;
 
     public Reconciler getReconciler() {
@@ -70,7 +82,7 @@ public class TransactionManager implements Serializable {
     public void setReconciler(Reconciler reconciler) {
         this.reconciler = reconciler;
     }
-    
+
     public Transaction getiExceptions() {
         return iExceptions;
     }
@@ -86,8 +98,8 @@ public class TransactionManager implements Serializable {
     public void setState(String state) {
         this.state = state;
     }
-    
-    public TransactionManager(){
+
+    public TransactionManager() {
         iExceptions = null;
         state = "not started";
         accountMap = new HashMap<String, NextPrevAccount>();
@@ -113,9 +125,9 @@ public class TransactionManager implements Serializable {
         this.accountMap.put(transaction.getTarget().getId(), nextPrevTarget);
         transaction.setState("hold");
     }
-    
-    public void addTransactions(List<Transaction> transactions){
-        for(Transaction transaction: transactions){
+
+    public void addTransactions(List<Transaction> transactions) {
+        for (Transaction transaction : transactions) {
             addTransaction(transaction);
         }
     }
@@ -144,22 +156,33 @@ public class TransactionManager implements Serializable {
             transaction.setState("success");
         }
     }
-    
-    public void commit(){
-        for(Map.Entry<String, NextPrevAccount> entry : accountMap.entrySet()){
-             accountMapper.updateAccount(entry.getValue().copy);
+
+    public void commit() {
+        for (Map.Entry<String, NextPrevAccount> entry : accountMap.entrySet()) {
+            accountMapper.updateAccount(entry.getValue().copy);
         }
         for (Transaction transaction : transactions) {
             transaction.setSource(accountMap.get(transaction.getSource().getId()).copy);
             transaction.setTarget(accountMap.get(transaction.getTarget().getId()).copy);
+
+            if (categoryMapper.selectCategory(transaction.getCategory().getCategoryId()) == null) {
+                categoryMapper.insertCategory(transaction.getCategory());
+            }
             transactionMapper.insertTransaction(transaction);
         }
     }
-    
-    public void rollback(){
+
+    public void rollback() {
         for (Transaction transaction : transactions) {
             transaction.setSource(accountMap.get(transaction.getSource().getId()).origin);
             transaction.setTarget(accountMap.get(transaction.getTarget().getId()).origin);
         }
-    }    
+    }
+
+    public void execute() {
+        begin();
+        if (getState() == "success") {
+            commit();
+        }
+    }
 }

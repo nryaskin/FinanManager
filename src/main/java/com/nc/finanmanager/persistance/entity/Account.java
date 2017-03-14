@@ -13,6 +13,11 @@ public class Account implements Serializable{
     private List<Transaction> incomeTransaction;
     private List<Transaction> outcomeTransaction;
 
+    public Account(){
+        this.user = new User();
+        this.currency = new Currency();
+    }
+    
     public List<Transaction> getIncomeTransaction() {
         return incomeTransaction;
     }

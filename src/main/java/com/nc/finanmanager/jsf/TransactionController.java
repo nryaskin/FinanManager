@@ -12,6 +12,7 @@ import java.util.UUID;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,10 +39,6 @@ public class TransactionController implements Serializable {
 
     private void initTransaction() {
         selectedTransaction = new Transaction();
-        selectedTransaction.setId(UUID.randomUUID().hashCode());
-        selectedTransaction.setSource(new Account());
-        selectedTransaction.setTarget(new Account());
-        selectedTransaction.setState("not executed");
     }
 
     @Autowired
@@ -107,17 +104,12 @@ public class TransactionController implements Serializable {
         if (transactionToRemove != null) {
             transactions.remove(transactionToRemove);
         }
-
-        statr = "delete" + id;
     }
 
     public void performTransaction() {
         statr = "youootuot";
         transactionManager.addTransactions(transactions);
-        transactionManager.begin();
-        if (transactionManager.getState() == "success") {
-            transactionManager.commit();
-        }
+        transactionManager.execute();
         statr += "hi" + transactionManager.getState();
     }
 

@@ -41,6 +41,10 @@ public interface AccountMapper {
     @Select("Select * FROM users WHERE username = #{username}")
     User getAccountsUser(String username);
     
+    @Results({
+        @Result(property = "currencyId", column = "current_id"),
+        @Result(property = "type", column = "type")
+    })
     @Select("SELECT * FROM currency WHERE current_id = #{currencyId}")
     Currency getAccountsCurrency(Integer currencyId);
     

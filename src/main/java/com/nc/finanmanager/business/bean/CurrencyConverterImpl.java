@@ -7,7 +7,7 @@ public class CurrencyConverterImpl implements CurrencyConverter {
     @Override
     public Double convert(Currency source, Currency target, Double current) {
         Double res = 0.0;
-        if (source.getCurrencyId() == target.getCurrencyId()) {
+        if (source.getCurrencyId().equals(target.getCurrencyId())) {
             return current;
         }
         switch (source.getType()) {
@@ -22,7 +22,7 @@ public class CurrencyConverterImpl implements CurrencyConverter {
                 }
                 break;
             case "EURO":
-                switch (source.getType()) {
+                switch (target.getType()) {
                     case "DOLLAR":
                         res = current / 0.95;
                         break;
@@ -32,7 +32,7 @@ public class CurrencyConverterImpl implements CurrencyConverter {
                 }
                 break;
             case "RUBLE":
-                switch (source.getType()) {
+                switch (target.getType()) {
                     case "DOLLAR":
                         res = current / 58.39;
                         break;

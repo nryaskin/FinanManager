@@ -23,6 +23,10 @@ public class TransactionHistoryController implements Serializable {
         return transactionsHistoryList;
     }
 
+    public void update(){
+        transactionsHistoryList = transactionMapper.selectAllTransactions();
+    }
+    
     public void setTransactionsHistoryList(List<Transaction> transactionsHistoryList) {
         this.transactionsHistoryList = transactionsHistoryList;
     }

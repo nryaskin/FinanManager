@@ -61,8 +61,6 @@ public class AccountController implements Serializable {
         ctx.register(MyBatisConfig.class);
         ctx.refresh();
         account = new Account();
-        account.setUser(new User());
-        account.setCurrency(new Currency());
         userMapper = ctx.getBean(UserMapper.class);
         this.users = userMapper.selectAllUsers();
         accountMapper = ctx.getBean(AccountMapper.class);
@@ -112,10 +110,6 @@ public class AccountController implements Serializable {
     }
     
     public void register(){
-        /*Account account = new Account();
-        account.setId(accountId);
-        account.setBalance(balance);
-        account.setUser(selectedUser);*/
         accountMapper.insertAccount(account);
         accountsList = accountMapper.selectAllAccounts();
     }

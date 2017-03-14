@@ -1,6 +1,7 @@
 package com.nc.finanmanager.persistance.entity;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 public class Transaction  implements Serializable {
     private Integer id;
@@ -10,6 +11,14 @@ public class Transaction  implements Serializable {
     private String state;
     private Double cash;
 
+    public Transaction(){       
+        this.setId(UUID.randomUUID().hashCode());
+        this.setSource(new Account());
+        this.setTarget(new Account());
+        this.setState("not executed");
+        this.category = new Category();
+    }
+    
     public Double getCash() {
         return cash;
     }

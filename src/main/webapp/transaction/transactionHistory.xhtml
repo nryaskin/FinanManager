@@ -20,13 +20,9 @@
                                paginatorPosition="bottom"
                                rows="10"
                                >
-                    <ace:column id="id" headerText="ID" sortBy="#{transaction.id}"
-                                filterBy="#{transaction.id}" filterMatchMode="contains">
-                        <h:outputText id="idCell" value="#{transaction.id}"/>
-                    </ace:column>
-                    <ace:column id="category" headerText="category" sortBy="#{transaction.category}"
-                                filterBy="#{transaction.category}" filterMatchMode="contains">
-                        <h:outputText id="categoryCell" value="#{transaction.category}"/>
+                    <ace:column id="category" headerText="category" sortBy="#{transaction.category.categoryId}"
+                                filterBy="#{transaction.category.categoryId}" filterMatchMode="contains">
+                        <h:outputText id="categoryCell" value="#{transaction.category.categoryId}"/>
                     </ace:column>       
 
                     <ace:column id="balance" headerText="transferedMoney" sortBy="#{transaction.cash}"
@@ -47,6 +43,7 @@
                         <h:outputText id="targetCell" value="#{transaction.target.id}"/>
                     </ace:column>
                 </ace:dataTable>
+                <ace:pushButton value="Update" actionListener="#{transactionHistoryController.update()}"/>
             </h:form>
         </ui:composition>
     </h:body>

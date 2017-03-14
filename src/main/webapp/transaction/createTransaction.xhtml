@@ -17,7 +17,10 @@
                     <h:panelGrid id="createTransactionGrid" columns="1">
                         <h:outputText value="New transaction"/>
                         <ace:textEntry id="idEntry" value="#{transactionController.selectedTransaction.cash}"
-                                       label="transactionMoney" labelPosition="left"/>
+                                       label="Money" labelPosition="left"/>
+                        <br/>
+                        <ace:textEntry id="idCategory" value="#{transactionController.selectedTransaction.category.categoryId}"
+                                       label="Category" labelPosition="left"/>
                         <br/>
                         <ace:simpleSelectOneMenu id="selectSource" value="#{transactionController.selectedTransaction.source.id}">
                             <f:selectItems value="#{transactionController.accounts}" var="source" itemLabel="#{source.id}" itemValue="#{source.id}"/>
